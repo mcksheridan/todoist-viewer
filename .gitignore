@@ -1,0 +1,10 @@
+# Git Ignore
+
+## Mac
+.DS_Store
+
+## NPM
+node_modules/
+
+## Webpack
+dist/

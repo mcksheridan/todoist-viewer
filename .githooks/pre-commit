@@ -1,0 +1,11 @@
+#!/bin/sh
+
+echo "Let's check the linter!"
+if npm run lint
+then
+  echo "Good job! No linting errors found."
+  exit 0
+else
+  echo "Uh-oh. We found at least one linting error."
+  exit 1
+fi

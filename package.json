@@ -1,0 +1,60 @@
+{
+  "name": "starter-build",
+  "version": "1.0.0",
+  "description": "Starter build for projects using React.js",
+  "private": true,
+  "engines": {
+    "git": ">=3.29"
+  },
+  "scripts": {
+    "preinstall": "git config core.hooksPath .githooks",
+    "test": "jest",
+    "lint:js": "npx eslint ./ --ignore-path .gitignore",
+    "lint:css": "npx stylelint **/*.scss",
+    "lint": "npm run lint:js && npm run lint:css",
+    "watch": "webpack --watch",
+    "start": "webpack serve --open",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcksheridan/starter-build.git"
+  },
+  "author": "Sheridan McKisick",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mcksheridan/starter-build/issues"
+  },
+  "homepage": "https://github.com/mcksheridan/starter-build#readme",
+  "devDependencies": {
+    "@babel/core": "^7.21.4",
+    "@babel/preset-env": "^7.21.4",
+    "babel-loader": "^9.1.2",
+    "css-loader": "^6.7.3",
+    "eslint": "^8.38.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-webpack-plugin": "^4.0.0",
+    "html-webpack-plugin": "^5.5.0",
+    "jest": "^29.5.0",
+    "sass": "^1.60.0",
+    "sass-loader": "^13.2.2",
+    "style-loader": "^3.3.2",
+    "stylelint": "^15.4.0",
+    "stylelint-config-standard-scss": "^8.0.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.2.2",
+    "webpack": "^5.77.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.13.2"
+  },
+  "dependencies": {
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
