@@ -2,6 +2,7 @@ import * as React from 'react';
 import '../scss/base.scss';
 import { createRoot } from 'react-dom/client';
 import { getProjectName, getProjectTasks } from './todoist';
+import getHtml from './convertMarkdown';
 
 document.body.innerHTML = '<div id="app"></div>';
 
@@ -15,6 +16,11 @@ const App = () => {
     const fetchData = async () => {
       const projectName = await getProjectName();
       const projectTasks = await getProjectTasks();
+      let i = 0;
+      while (i < projectTasks.length) {
+        projectTasks[i].content = await getHtml(projectTasks[i].content)
+        i += 1;
+      }
       setName(projectName);
       setTasks(projectTasks);
     }
