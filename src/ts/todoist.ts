@@ -1,4 +1,4 @@
-import { TodoistApi } from "@doist/todoist-api-typescript"
+import { Section, TodoistApi } from "@doist/todoist-api-typescript"
 
 const api = new TodoistApi(process.env.TODOIST_API)
 
@@ -21,4 +21,19 @@ const getProjectTasks = async () => {
   }
 }
 
-export { getProjectName, getProjectTasks }
+const getProjectSections = async (sectionIds: string[]) => {
+  const sections: Section[] = [];
+  let i = 0;
+  while (i < sectionIds.length) {
+    try {
+      const section = await api.getSection(sectionIds[i]);
+      sections.push(section);
+      i += 1;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  return sections;
+}
+
+export { getProjectName, getProjectTasks, getProjectSections }
