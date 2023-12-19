@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   mode: 'development',
@@ -19,6 +20,7 @@ module.exports = {
       template: 'src/index.html',
     }),
     new ESLintPlugin(),
+    new Dotenv(),
   ],
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
