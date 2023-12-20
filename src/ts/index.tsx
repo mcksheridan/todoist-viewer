@@ -7,6 +7,10 @@ import getHtml from './convertMarkdown';
 
 import type { Section, Task } from '@doist/todoist-api-typescript';
 
+export type Task_With_Section_Data = Task & {
+  section: Section;
+}
+
 document.body.innerHTML = '<div id="app"></div>';
 
 const root = createRoot(document.getElementById('app'));
@@ -14,12 +18,19 @@ const root = createRoot(document.getElementById('app'));
 const App = () => {
   const [name, setName] = React.useState('Untitled Project');
   const [tasks, setTasks] = React.useState([]);
-  const [sections, setSections] = React.useState([]);
 
   const getSectionIds = (tasks: Task[]) => {
     const allSectionIds = tasks.map((task) => task.sectionId);
     const uniqueSectionIds = allSectionIds.filter((id, i, arr) => arr.indexOf(id) === i);
     return uniqueSectionIds;
+  }
+
+  const getTaskSection = (sections: Section[], taskSectionId: string) => {
+    const resultArr = sections.filter((section) => {
+      return section?.id === taskSectionId
+    });
+    const result = resultArr[0];
+    return result;
   }
 
   const removeBulletPoints = (string: string) => {
@@ -33,6 +44,8 @@ const App = () => {
     const fetchData = async () => {
       const projectName = await getProjectName();
       const projectTasks = await getProjectTasks();
+      const sectionIds = getSectionIds(projectTasks);
+      const projectSections = await getProjectSections(sectionIds);
       let i = 0;
       while (i < projectTasks.length) {
         projectTasks[i].content = await getHtml(
@@ -41,24 +54,16 @@ const App = () => {
         projectTasks[i].description = await getHtml(
           projectTasks[i].description
         )
+        projectTasks[i].section = getTaskSection(
+          projectSections, projectTasks[i].sectionId
+        )
         i += 1;
       }
       setName(projectName);
       setTasks(projectTasks);
-      const sectionIds = getSectionIds(projectTasks);
-      const projectSections = await getProjectSections(sectionIds);
-      setSections(projectSections);
     }
     fetchData();
   }, []);
-
-  const getTaskSection = (sections: Section[], taskSectionId: string) => {
-    const resultArr = sections.filter((section) => {
-      return section?.id === taskSectionId
-    });
-    const result = resultArr[0];
-    return result;
-  }
 
   return (
     <>
