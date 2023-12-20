@@ -38,6 +38,9 @@ const App = () => {
         projectTasks[i].content = await getHtml(
           removeBulletPoints(projectTasks[i].content)
         );
+        projectTasks[i].description = await getHtml(
+          projectTasks[i].description
+        )
         i += 1;
       }
       setName(projectName);
