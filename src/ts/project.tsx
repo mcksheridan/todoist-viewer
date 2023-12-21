@@ -20,6 +20,9 @@ const Project = () => {
   const [name, setName] = React.useState('Untitled Project');
   const [tasks, setTasks] = React.useState([]);
   const [buttonText, setButtonText] = React.useState('Section');
+  const [maxTasks, setMaxTasks] = React.useState(15);
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [lastPage, setLastPage] = React.useState(1);
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -46,14 +49,20 @@ const Project = () => {
     fetchData();
   }, []);
 
+  React.useEffect(() => {
+    setLastPage(Math.ceil(tasks.length / maxTasks))
+  }, [tasks, maxTasks])
+
   const handleButton = () => {
     if (buttonText === 'Section') {
       setButtonText('Date');
       setTasks(sortTasksBySection(tasks))
+      setCurrentPage(1);
       return;
     } else {
       setButtonText('Section');
       setTasks(sortTasksByDate(tasks))
+      setCurrentPage(1);
       return;
     }
   }
@@ -62,7 +71,29 @@ const Project = () => {
     <main>
       <h1>{name} Tasks</h1>
       <p><button type="button" onClick={() => handleButton()}>View By {buttonText}</button></p>
-      {tasks.slice(0, 15).map((task) => {
+      <p>Total tasks: {tasks?.length ?? 0}</p>
+      {tasks?.length > 0 ?
+        <>
+          <p>
+            <button type="button" onClick={() => setMaxTasks(15)}>15</button>
+            <button type="button" onClick={() => setMaxTasks(25)}>25</button>
+            <button type="button" onClick={() => setMaxTasks(50)}>50</button>
+          </p>
+          <p>
+            <button type="button" onClick={() => setCurrentPage(1)} disabled={currentPage === 1 ? true : false}>First</button>
+            <button type="button" onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1 ? true : false}>Previous</button>
+            Page {currentPage} of {lastPage}
+            <button type="button" onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === lastPage ? true : false}>Next</button>
+            <button type="button" onClick={() => setCurrentPage(lastPage)} disabled={currentPage === lastPage ? true : false}>Last</button>
+          </p>
+        </>
+        :
+        <p>No tasks to view</p>
+      }
+      {tasks.slice(
+        maxTasks * currentPage - maxTasks,
+        maxTasks * currentPage
+        ).map((task) => {
         return (
           <ProjectTask
             key={task?.id}
