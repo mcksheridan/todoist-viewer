@@ -97,7 +97,7 @@ const Project = () => {
         maxTasks * currentPage
         ).map((task, i, arr) => {
         return (
-          <>
+          <React.Fragment key={task?.id}>
             {
               sort === 'Date'
               && task?.due?.date !== arr[i - 1]?.due?.date
@@ -108,11 +108,8 @@ const Project = () => {
               && task?.section?.name !== arr[i - 1]?.section?.name
               && <h2>{task?.section?.name}</h2>
             }
-            <ProjectTask
-              key={task?.id}
-              {...task}
-            />
-          </>
+            <ProjectTask {...task} />
+          </React.Fragment>
         )
       })}
     </main>
