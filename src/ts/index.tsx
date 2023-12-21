@@ -66,12 +66,17 @@ const App = () => {
   }, []);
 
   return (
-    <>
+    <main>
       <h1>{name} Tasks</h1>
-      <ul>
-        {tasks.map((task) => <li key={task?.id}>{task?.content}</li>)}
-      </ul>
-    </>
+      {tasks.slice(0, 15).map((task) => {
+        return (
+          <ProjectTask
+            key={task?.id}
+            {...task}
+          />
+        )
+      })}
+    </main>
   );
 }
 
