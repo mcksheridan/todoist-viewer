@@ -4,9 +4,9 @@ import type { Task_With_Section_Data } from './project';
 const ProjectTask = (task: Task_With_Section_Data) => {
   return (
     <article>
-      <h2 dangerouslySetInnerHTML={{__html: task?.content}} />
+      <h3 dangerouslySetInnerHTML={{__html: task?.content}} />
       {task?.section ?
-        <h3>{task?.section?.name}</h3>
+        <p>{task?.section?.name}</p>
       : ''}
       {task?.due ?
         <time>{task.due.string}</time>
@@ -16,7 +16,7 @@ const ProjectTask = (task: Task_With_Section_Data) => {
       : ''}
       {task?.labels ?
         <>
-          <h3>Labels</h3>
+          <h4>Labels</h4>
           <ul>
             {task.labels.map((label) => {
               return <li key={`${task.id}-${label}`}>{label}</li>

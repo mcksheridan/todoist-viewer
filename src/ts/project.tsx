@@ -19,6 +19,7 @@ export type Task_With_Section_Data = Task & {
 const Project = () => {
   const [name, setName] = React.useState('Untitled Project');
   const [tasks, setTasks] = React.useState([]);
+  const [sort, setSort] = React.useState<'Date' | 'Section'>('Date')
   const [buttonText, setButtonText] = React.useState('Section');
   const [maxTasks, setMaxTasks] = React.useState(15);
   const [currentPage, setCurrentPage] = React.useState(1);
@@ -56,11 +57,13 @@ const Project = () => {
   const handleButton = () => {
     if (buttonText === 'Section') {
       setButtonText('Date');
+      setSort('Date')
       setTasks(sortTasksBySection(tasks))
       setCurrentPage(1);
       return;
     } else {
       setButtonText('Section');
+      setSort('Section')
       setTasks(sortTasksByDate(tasks))
       setCurrentPage(1);
       return;
@@ -93,12 +96,24 @@ const Project = () => {
       {tasks.slice(
         maxTasks * currentPage - maxTasks,
         maxTasks * currentPage
-        ).map((task) => {
+        ).map((task, i, arr) => {
         return (
-          <ProjectTask
-            key={task?.id}
-            {...task}
-          />
+          <>
+            {
+              sort === 'Date'
+              && task?.due?.date !== arr[i - 1]?.due?.date
+              && <h2>{task?.due?.string}</h2>
+            }
+            {
+              sort === 'Section'
+              && task?.section?.name !== arr[i - 1]?.section?.name
+              && <h2>{task?.section?.name}</h2>
+            }
+            <ProjectTask
+              key={task?.id}
+              {...task}
+            />
+          </>
         )
       })}
     </main>
