@@ -20,7 +20,6 @@ const Project = () => {
   const [name, setName] = React.useState('Untitled Project');
   const [tasks, setTasks] = React.useState([]);
   const [sort, setSort] = React.useState<'Date' | 'Section'>('Date')
-  const [buttonText, setButtonText] = React.useState('Section');
   const [maxTasks, setMaxTasks] = React.useState(15);
   const [currentPage, setCurrentPage] = React.useState(1);
   const [lastPage, setLastPage] = React.useState(1);
@@ -45,7 +44,7 @@ const Project = () => {
         i += 1;
       }
       setName(projectName);
-      setTasks(projectTasks);
+      setTasks(sortTasksByDate(projectTasks));
     }
     fetchData();
   }, []);
@@ -55,16 +54,16 @@ const Project = () => {
   }, [tasks, maxTasks])
 
   const handleButton = () => {
-    if (buttonText === 'Section') {
-      setButtonText('Date');
+    if (sort === 'Section') {
       setSort('Date')
-      setTasks(sortTasksBySection(tasks))
+      setTasks(sortTasksByDate(tasks))
       setCurrentPage(1);
       return;
-    } else {
-      setButtonText('Section');
+    }
+
+    if (sort === 'Date') {
       setSort('Section')
-      setTasks(sortTasksByDate(tasks))
+      setTasks(sortTasksBySection(tasks))
       setCurrentPage(1);
       return;
     }
@@ -73,7 +72,7 @@ const Project = () => {
   return (
     <main>
       <h1>{name} Tasks</h1>
-      <p><button type="button" onClick={() => handleButton()}>View By {buttonText}</button></p>
+      <p><button type="button" onClick={() => handleButton()}>View By {sort === 'Date' ? 'Section' : 'Date'}</button></p>
       <p>Total tasks: {tasks?.length ?? 0}</p>
       {tasks?.length > 0 ?
         <>
