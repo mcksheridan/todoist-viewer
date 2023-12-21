@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { Task_With_Section_Data } from '.';
+import type { Task_With_Section_Data } from './project';
 
 const ProjectTask = (task: Task_With_Section_Data) => {
   return (
