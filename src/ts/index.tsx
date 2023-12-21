@@ -18,6 +18,7 @@ const root = createRoot(document.getElementById('app'));
 const App = () => {
   const [name, setName] = React.useState('Untitled Project');
   const [tasks, setTasks] = React.useState([]);
+  const [buttonText, setButtonText] = React.useState('Section');
 
   const getSectionIds = (tasks: Task[]) => {
     const allSectionIds = tasks.map((task) => task.sectionId);
@@ -65,9 +66,48 @@ const App = () => {
     fetchData();
   }, []);
 
+  const sortTasksByDate = (tasks: Task[]) => {
+    return tasks.sort((a, b) => {
+      const dateA = new Date(a?.due?.datetime ?? a?.due?.date)
+      const dateB = new Date(b?.due?.datetime ?? b?.due?.date)
+      if (dateA > dateB) {
+        return 1;
+      } else if (dateA < dateB) {
+        return -1;
+      } else {
+        return 0;
+      }
+    })
+  }
+
+  const sortTasksBySection = (tasks: Task_With_Section_Data[]) => {
+    return tasks.sort((a, b) => {
+      if (a?.section?.order > b?.section?.order) {
+        return -1;
+      } else if (a?.section?.order < b?.section?.order) {
+        return 1;
+      } else {
+        return 0;
+      }
+    })
+  }
+
+  const handleButton = () => {
+    if (buttonText === 'Section') {
+      setButtonText('Date');
+      setTasks(sortTasksBySection(tasks))
+      return;
+    } else {
+      setButtonText('Section');
+      setTasks(sortTasksByDate(tasks))
+      return;
+    }
+  }
+
   return (
     <main>
       <h1>{name} Tasks</h1>
+      <p><button type="button" onClick={() => handleButton()}>View By {buttonText}</button></p>
       {tasks.slice(0, 15).map((task) => {
         return (
           <ProjectTask
