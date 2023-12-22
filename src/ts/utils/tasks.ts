@@ -7,6 +7,15 @@ const getSectionIds = (tasks: Task[]) => {
   return uniqueSectionIds;
 }
 
+const getTaskLabels = (tasks: Task[]): string[] => {
+  const labels: string[] = [];
+  tasks.forEach((task) => {
+    const newLabels = task.labels.filter((label) => !labels.includes(label))
+    newLabels.forEach((newLabel) => labels.push(newLabel));
+  })
+  return labels;
+}
+
 const getTaskSection = (sections: Section[], taskSectionId: string) => {
   const resultArr = sections.filter((section) => {
     return section?.id === taskSectionId
@@ -48,4 +57,11 @@ const sortTasksBySection = (tasks: Task_With_Section_Data[]) => {
   })
 }
 
-export { getSectionIds, getTaskSection, removeBulletPoints, sortTasksByDate, sortTasksBySection }
+export {
+  getSectionIds,
+  getTaskLabels,
+  getTaskSection,
+  removeBulletPoints,
+  sortTasksByDate,
+  sortTasksBySection
+}

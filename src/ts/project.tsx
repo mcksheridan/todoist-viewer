@@ -2,6 +2,7 @@ import * as React from 'react';
 import { getProjectName, getProjectSections, getProjectTasks } from './utils/todoist';
 import {
   getSectionIds,
+  getTaskLabels,
   getTaskSection,
   removeBulletPoints,
   sortTasksByDate,
@@ -19,6 +20,10 @@ export type Task_With_Section_Data = Task & {
 const Project = () => {
   const [name, setName] = React.useState('Untitled Project');
   const [tasks, setTasks] = React.useState([]);
+  const [filteredTasks, setFilteredTasks] = React.useState([]);
+  const [sections, setSections] = React.useState([]);
+  const [labels, setLabels] = React.useState<string[]>([]);
+  const [inputLabels, setInputLabels] = React.useState<string[]>([]);
   const [sort, setSort] = React.useState<'Date' | 'Section'>('Date')
   const [maxTasks, setMaxTasks] = React.useState(15);
   const [currentPage, setCurrentPage] = React.useState(1);
@@ -28,8 +33,6 @@ const Project = () => {
     const fetchData = async () => {
       const projectName = await getProjectName();
       const projectTasks = await getProjectTasks();
-      const sectionIds = getSectionIds(projectTasks);
-      const projectSections = await getProjectSections(sectionIds);
       let i = 0;
       while (i < projectTasks.length) {
         projectTasks[i].content = await getHtml(
@@ -37,9 +40,6 @@ const Project = () => {
         );
         projectTasks[i].description = await getHtml(
           projectTasks[i].description
-        )
-        projectTasks[i].section = getTaskSection(
-          projectSections, projectTasks[i].sectionId
         )
         i += 1;
       }
@@ -50,8 +50,31 @@ const Project = () => {
   }, []);
 
   React.useEffect(() => {
-    setLastPage(Math.ceil(tasks.length / maxTasks))
-  }, [tasks, maxTasks])
+    setFilteredTasks(tasks)
+  }, [tasks])
+
+  React.useEffect(() => {
+    setLastPage(Math.ceil(filteredTasks.length / maxTasks))
+  }, [filteredTasks, maxTasks])
+
+  React.useEffect(() => {
+    setLabels(getTaskLabels(filteredTasks))
+  }, [filteredTasks])
+
+  React.useEffect(() => {
+    (async () => {
+      const sectionIds = getSectionIds(filteredTasks);
+      const projectSections = await getProjectSections(sectionIds);
+      setSections(projectSections);
+      let i = 0;
+      while (i < filteredTasks.length) {
+        filteredTasks[i].section = getTaskSection(
+          projectSections, filteredTasks[i].sectionId
+        )
+        i += 1;
+      }
+    })()
+  }, [filteredTasks])
 
   const handleButton = () => {
     if (sort === 'Section') {
@@ -69,12 +92,31 @@ const Project = () => {
     }
   }
 
+  const filterTasksBySection = (id: string) => {
+    setFilteredTasks(filteredTasks.filter((task) => {
+      return task.section.id === id
+    }))
+  }
+
+  const filterTasksByLabel = (inputLabel: string) => {
+    setInputLabels([...inputLabels, inputLabel])
+    setFilteredTasks(filteredTasks.filter((task) => {
+      return [...inputLabels, inputLabel].every((label) => {
+        return task.labels.includes(label)
+      })
+    }))
+  }
+
+  console.log(filteredTasks[0])
+
   return (
     <main>
       <h1>{name} Tasks</h1>
       <p><button type="button" onClick={() => handleButton()}>View By {sort === 'Date' ? 'Section' : 'Date'}</button></p>
+      <p>Active Tasks: {filteredTasks?.length ?? 0}</p>
+      <p>Hidden Tasks: {tasks?.length - filteredTasks?.length ?? 0}</p>
       <p>Total tasks: {tasks?.length ?? 0}</p>
-      {tasks?.length > 0 ?
+      {filteredTasks?.length > 0 ?
         <>
           <p>
             <button type="button" onClick={() => setMaxTasks(15)}>15</button>
@@ -92,7 +134,37 @@ const Project = () => {
         :
         <p>No tasks to view</p>
       }
-      {tasks.slice(
+      <p>
+        <button type="button" onClick={() => setFilteredTasks(tasks)}>Reset Filters</button>
+      </p>
+      <p>Filter by section:</p>
+      <ul>
+        {sections.sort((a, b) => {
+          return b?.order - a?.order
+          }).map((section) => {
+          return <li key={section?.id}><button type="button" onClick={() => filterTasksBySection(section?.id)}>{section?.name}</button></li>
+        })}
+      </ul>
+      <p>Filter by label:</p>
+      <ul>
+        {labels.sort((a, b) => {
+          const labelA = a.toLowerCase();
+          const labelB = b.toLowerCase();
+
+          if (labelA > labelB) {
+            return 1
+          }
+
+          if (labelA < labelB) {
+            return -1
+          }
+
+          return
+        }).map((label) => {
+          return <li key={label}><button type="button" onClick={() => filterTasksByLabel(label)}>{label}</button></li>
+        })}
+      </ul>
+      {filteredTasks.slice(
         maxTasks * currentPage - maxTasks,
         maxTasks * currentPage
         ).map((task, i, arr) => {
