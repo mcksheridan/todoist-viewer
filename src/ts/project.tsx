@@ -107,8 +107,6 @@ const Project = () => {
     }))
   }
 
-  console.log(filteredTasks[0])
-
   return (
     <main>
       <h1>{name} Tasks</h1>
