@@ -110,10 +110,11 @@ const Project = () => {
   return (
     <main>
       <h1>{name} Tasks</h1>
+      <p className="description">
+        {tasks?.length} tasks
+        ({filteredTasks?.length - tasks.length ?? 0} hidden)
+      </p>
       <p><button type="button" onClick={() => handleButton()}>View By {sort === 'Date' ? 'Section' : 'Date'}</button></p>
-      <p>Active Tasks: {filteredTasks?.length ?? 0}</p>
-      <p>Hidden Tasks: {tasks?.length - filteredTasks?.length ?? 0}</p>
-      <p>Total tasks: {tasks?.length ?? 0}</p>
       {filteredTasks?.length > 0 ?
         <>
           <p>
