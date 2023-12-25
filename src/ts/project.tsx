@@ -25,6 +25,7 @@ import UpIcon from '../assets/img/icon__up.png';
 
 import type { Section, Task } from '@doist/todoist-api-typescript';
 import TextWithIcon from './cmp/textWithIcon';
+import ButtonWithIcon from './cmp/buttonWithIcon';
 
 export type Task_With_Section_Data = Task & {
   section: Section;
@@ -195,15 +196,12 @@ const Project = () => {
           image={checkmarkIcon.src}
           text={`${tasks?.length} tasks (${tasks?.length - filteredTasks.length ?? 0} hidden)`}
         />
-        <button
-          type="button"
-          onClick={() => handleViewMenu()}
-          disabled={filteredTasks?.length < 1 ? true : false}
-          className="description__container"
-        >
-          <img src={sliderIcon.src} alt="" className="description__icon" />
-          View
-        </button>
+        <ButtonWithIcon
+          action={() => handleViewMenu()}
+          disabled={filteredTasks?.length < 1}
+          image={sliderIcon.src}
+          text="View"
+        />
       </div>
       <div className="view" ref={view}>
         <h2 className="subheading">View</h2>
@@ -234,9 +232,11 @@ const Project = () => {
         <h3 className="subheading">Filter by</h3>
         <ul>
           <li className="description">
-            <button type="button" onClick={() => setFilteredTasks(tasks)}>
-              <img src={resetIcon.src}  alt="" className="description__icon" /> Reset Filters
-            </button>
+            <ButtonWithIcon
+              action={() => setFilteredTasks(tasks)}
+              image={resetIcon.src}
+              text="Reset filters"
+            />
           </li>
           <li>
             <label className="label-with-icon">
@@ -300,72 +300,46 @@ const Project = () => {
         </ul>
       </div>
       <div className="page-container">
-        <button
-          type="button"
-          onClick={() => setCurrentPage(1)}
+        <ButtonWithIcon
+          action={() => setCurrentPage(1)}
           disabled={currentPage === 1}
-          className="page-container__button"
-        >
-          <img
-            src={firstIcon.src}
-            alt=""
-            className="page-container__icon"
-          />
-          first
-        </button>
-        <button
-          type="button"
-          onClick={() => setCurrentPage(currentPage - 1)}
+          image={firstIcon.src}
+          text="first"
+        />
+        <ButtonWithIcon
+          action={() => setCurrentPage(currentPage - 1)}
           disabled={currentPage === 1}
-          className="page-container__button"
-        >
-          <img
-            src={backIcon.src}
-            alt=""
-            className="page-container__icon"
-          />
-          back
-        </button>
+          image={backIcon.src}
+          text="back"
+        />
         <span>
           {currentPage} / {lastPage}
         </span>
-        <button
-          type="button"
-          onClick={() => setCurrentPage(currentPage + 1)}
+        <ButtonWithIcon
+          action={() => setCurrentPage(currentPage + 1)}
           disabled={currentPage === lastPage}
-          className="page-container__button"
-        >
-          next
-          <img
-            src={nextIcon.src}
-            alt=""
-            className="page-container__icon"
-          />
-        </button>
-        <button
-          type="button"
-          onClick={() => setCurrentPage(lastPage)}
+          image={nextIcon.src}
+          text="next"
+          textBeforeIcon
+        />
+        <ButtonWithIcon
+          action={() => setCurrentPage(lastPage)}
           disabled={currentPage === lastPage}
-          className="page-container__button"
-        >
-          last
-          <img
-            src={lastIcon.src}
-            alt=""
-            aria-label="Last page"
-            className="page-container__icon"
-          />
-        </button>
+          image={lastIcon.src}
+          text="last"
+          textBeforeIcon
+        />
       </div>
       {filteredTasks
         .slice(maxTasks * currentPage - maxTasks, maxTasks * currentPage)
         .map((task: Task_With_Section_Data) => <ProjectTask {...task} key={task.id} />
       )}
       <span className="description">
-        <button onClick={() => handleTopButton()} className="description__container">
-          <img src={upIcon.src} alt="" className="description__icon" />
-          back to top
-        </button>
+        <ButtonWithIcon
+          action={() => handleTopButton()}
+          image={upIcon.src}
+          text="back to top"
+        />
       </span>
     </main>
   );
