@@ -20,7 +20,9 @@ module.exports = {
       template: 'src/index.html',
     }),
     new ESLintPlugin(),
-    new Dotenv(),
+    new Dotenv({
+      systemvars: true,
+    }),
   ],
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
