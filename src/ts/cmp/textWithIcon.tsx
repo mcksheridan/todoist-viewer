@@ -3,12 +3,14 @@ import * as React from "react";
 type Text_With_Icon = {
   elementType?: "time" | "li";
   key?: string;
+  hasWarning?: boolean;
   image: string;
   text: string;
 };
 
 const TextWithIcon = ({
   elementType,
+  hasWarning,
   image,
   key,
   text,
@@ -17,7 +19,7 @@ const TextWithIcon = ({
   const content = (
     <>
       <img src={image} alt="" className="text-with-icon__icon" />
-      {text}
+      {hasWarning ? <span className="warning-text">{text}</span> : text}
     </>
   );
 

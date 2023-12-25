@@ -33,6 +33,7 @@ const ProjectTask = (task: Task_With_Section_Data): JSX.Element => {
             elementType="time"
             image={dateIcon.src}
             text={task.due.string}
+            hasWarning={new Date(task.due.date) < new Date(Date.now())}
           />
         ) : (
           ""
