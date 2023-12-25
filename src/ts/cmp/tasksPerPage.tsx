@@ -21,10 +21,10 @@ const TasksPerPage = ({
     <div>
       <label className="label-with-icon">
         <span>
-          <img src={pageIcon.src} alt="" />
+          <img src={pageIcon.src} alt="" className="label-with-icon__icon" />
           Tasks per page
         </span>
-        <select>
+        <select className="label-with-icon__select label-with-icon__select--small">
           {sortedTaskNumbers.map((taskNumber) => (
             <option
               key={"task-" + taskNumber}

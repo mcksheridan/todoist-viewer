@@ -11,9 +11,16 @@ import {
 import ProjectTask from './projectTask';
 import getHtml from './utils/convertMarkdown';
 import TasksPerPage from './cmp/tasksPerPage';
+import BackIcon from '../assets/img/icon__back.png';
+import CheckmarkIcon from '../assets/img/icon__checkmark.png';
 import DateIcon from '../assets/img/icon__date.png';
+import FirstIcon from '../assets/img/icon__first.png';
 import LabelIcon from '../assets/img/icon__label.png';
+import LastIcon from '../assets/img/icon__last.png';
+import NextIcon from '../assets/img/icon__next.png';
+import ResetIcon from '../assets/img/icon__reset.png';
 import SectionIcon from '../assets/img/icon__section.png';
+import SliderIcon from '../assets/img/icon__slider.png';
 
 import type { Section, Task } from '@doist/todoist-api-typescript';
 
@@ -21,12 +28,26 @@ export type Task_With_Section_Data = Task & {
   section: Section;
 }
 
+const backIcon = new Image();
+backIcon.src = BackIcon;
+const checkmarkIcon = new Image();
+checkmarkIcon.src = CheckmarkIcon;
 const dateIcon = new Image();
 dateIcon.src = DateIcon;
+const firstIcon = new Image();
+firstIcon.src = FirstIcon;
 const labelIcon = new Image();
 labelIcon.src = LabelIcon;
+const lastIcon = new Image();
+lastIcon.src = LastIcon;
+const nextIcon = new Image();
+nextIcon.src = NextIcon;
+const resetIcon = new Image();
+resetIcon.src = ResetIcon;
 const sectionIcon = new Image();
 sectionIcon.src = SectionIcon;
+const sliderIcon = new Image();
+sliderIcon.src = SliderIcon;
 
 const Project = () => {
   const [name, setName] = React.useState('Untitled Project');
@@ -160,7 +181,8 @@ const Project = () => {
     <main ref={main} className="main">
       <h1 className="heading">{name} Tasks</h1>
       <p className="description">
-        <span>
+        <span className="description__container">
+          <img src={checkmarkIcon.src} alt="" className="description__icon" />
           {tasks?.length} tasks ({tasks?.length - filteredTasks.length ?? 0}{" "}
           hidden)
         </span>
@@ -168,7 +190,9 @@ const Project = () => {
           type="button"
           onClick={() => handleViewMenu()}
           disabled={filteredTasks?.length < 1 ? true : false}
+          className="description__container"
         >
+          <img src={sliderIcon.src} alt="" className="description__icon" />
           View
         </button>
       </p>
@@ -198,20 +222,20 @@ const Project = () => {
             <img src={sectionIcon.src} alt="" /> Section
           </button>
         </div>
-        <h3>Filter by</h3>
+        <h3 className="subheading">Filter by</h3>
         <ul>
-          <li>
+          <li className="description">
             <button type="button" onClick={() => setFilteredTasks(tasks)}>
-              Reset Filters
+              <img src={resetIcon.src}  alt="" className="description__icon" /> Reset Filters
             </button>
           </li>
           <li>
             <label className="label-with-icon">
               <span>
-                <img src={sectionIcon.src} alt="" />
+                <img src={sectionIcon.src} alt="" className="label-with-icon__icon" />
                 Section
               </span>
-              <select>
+              <select className="label-with-icon__select">
                 {sections
                   .sort((a, b) => {
                     return b?.order - a?.order;
@@ -232,10 +256,10 @@ const Project = () => {
           <li>
             <label className="label-with-icon">
               <span>
-                <img src={labelIcon.src} alt="" />
+                <img src={labelIcon.src} alt="" className="label-with-icon__icon" />
                 Label
               </span>
-              <select>
+              <select className="label-with-icon__select">
                 {labels
                   .sort((a, b) => {
                     const labelA = a.toLowerCase();
@@ -266,53 +290,68 @@ const Project = () => {
           </li>
         </ul>
       </div>
-      <p>
+      <div className="page-container">
         <button
           type="button"
           onClick={() => setCurrentPage(1)}
-          disabled={currentPage === 1 ? true : false}
+          disabled={currentPage === 1}
+          className="page-container__button"
         >
-          First
+          <img
+            src={firstIcon.src}
+            alt=""
+            className="page-container__icon"
+          />
+          first
         </button>
         <button
           type="button"
           onClick={() => setCurrentPage(currentPage - 1)}
-          disabled={currentPage === 1 ? true : false}
+          disabled={currentPage === 1}
+          className="page-container__button"
         >
-          Previous
+          <img
+            src={backIcon.src}
+            alt=""
+            className="page-container__icon"
+          />
+          back
         </button>
-        Page {currentPage} of {lastPage}
+        <span>
+          {currentPage} / {lastPage}
+        </span>
         <button
           type="button"
           onClick={() => setCurrentPage(currentPage + 1)}
-          disabled={currentPage === lastPage ? true : false}
+          disabled={currentPage === lastPage}
+          className="page-container__button"
         >
-          Next
+          next
+          <img
+            src={nextIcon.src}
+            alt=""
+            className="page-container__icon"
+          />
         </button>
         <button
           type="button"
           onClick={() => setCurrentPage(lastPage)}
-          disabled={currentPage === lastPage ? true : false}
+          disabled={currentPage === lastPage}
+          className="page-container__button"
         >
-          Last
+          last
+          <img
+            src={lastIcon.src}
+            alt=""
+            aria-label="Last page"
+            className="page-container__icon"
+          />
         </button>
-      </p>
+      </div>
       {filteredTasks
         .slice(maxTasks * currentPage - maxTasks, maxTasks * currentPage)
-        .map((task, i, arr) => {
-          return (
-            <React.Fragment key={task?.id}>
-              {sort === "Date" && task?.due?.date !== arr[i - 1]?.due?.date && (
-                <h2>{task?.due?.string}</h2>
-              )}
-              {sort === "Section" &&
-                task?.section?.name !== arr[i - 1]?.section?.name && (
-                  <h2>{task?.section?.name}</h2>
-                )}
-              <ProjectTask {...task} />
-            </React.Fragment>
-          );
-        })}
+        .map((task: Task_With_Section_Data) => <ProjectTask {...task} key={task.id} />
+        )}
     </main>
   );
 }
