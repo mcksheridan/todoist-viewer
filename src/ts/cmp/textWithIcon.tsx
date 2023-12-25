@@ -2,7 +2,6 @@ import * as React from "react";
 
 type Text_With_Icon = {
   elementType?: "time" | "li";
-  key?: string;
   hasWarning?: boolean;
   image: string;
   text: string;
@@ -12,7 +11,6 @@ const TextWithIcon = ({
   elementType,
   hasWarning,
   image,
-  key,
   text,
 }: Text_With_Icon): JSX.Element => {
   const CLASS_NAME = "text-with-icon";
@@ -29,7 +27,7 @@ const TextWithIcon = ({
 
   if (elementType === "li") {
     return (
-      <li key={key} className={CLASS_NAME}>
+      <li className={CLASS_NAME}>
         {content}
       </li>
     );
