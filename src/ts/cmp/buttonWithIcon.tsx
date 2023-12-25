@@ -28,7 +28,7 @@ const ButtonWithIcon = ({
         alt=""
         className={
           textBeforeIcon
-            ? "button-with-icon__icon button-with-icon__icon--before"
+            ? "button-with-icon__icon button-with-icon__icon--after"
             : "button-with-icon__icon"
         }
       />

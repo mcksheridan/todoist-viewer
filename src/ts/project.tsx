@@ -191,7 +191,7 @@ const Project = () => {
   return (
     <main ref={main} className="main">
       <h1 className="heading">{name} Tasks</h1>
-      <div className="description">
+      <div className="subheading-text spaced-container">
         <TextWithIcon
           image={checkmarkIcon.src}
           text={`${tasks?.length} tasks (${tasks?.length - filteredTasks.length ?? 0} hidden)`}
@@ -231,7 +231,7 @@ const Project = () => {
         </div>
         <h3 className="subheading">Filter by</h3>
         <ul>
-          <li className="description">
+          <li className="subheading-text">
             <ButtonWithIcon
               action={() => setFilteredTasks(tasks)}
               image={resetIcon.src}
@@ -312,7 +312,7 @@ const Project = () => {
           image={backIcon.src}
           text="back"
         />
-        <span>
+        <span className="page-container__current-page">
           {currentPage} / {lastPage}
         </span>
         <ButtonWithIcon
@@ -334,7 +334,7 @@ const Project = () => {
         .slice(maxTasks * currentPage - maxTasks, maxTasks * currentPage)
         .map((task: Task_With_Section_Data) => <ProjectTask {...task} key={task.id} />
       )}
-      <span className="description">
+      <span className="subheading-text">
         <ButtonWithIcon
           action={() => handleTopButton()}
           image={upIcon.src}

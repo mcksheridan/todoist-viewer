@@ -1,0 +1,17 @@
+@use "../settings" as *;
+
+.project-task {
+  margin-block: $xl-space;
+  border-bottom: 1px solid $accent-color;
+  padding: $xs-space;
+
+  &__content {
+    font-size: $med-font;
+  }
+
+  &__labels {
+    column-gap: $lg-space;
+    display: flex;
+    flex-wrap: wrap;
+  }
+}

@@ -1,0 +1,11 @@
+@use "./settings" as *;
+
+.subheading-text {
+  color: $subtle-color;
+  font-size: $sm-font;
+  font-weight: $light;
+}
+
+.warning-text {
+  color: $warning-color;
+}

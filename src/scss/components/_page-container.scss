@@ -1,0 +1,12 @@
+@use "../settings" as *;
+
+.page-container {
+  display: flex;
+  font-size: $med-font;
+  justify-content: space-around;
+  margin-block: $lg-space;
+
+  &__current-page {
+    padding: $sm-space;
+  }
+}

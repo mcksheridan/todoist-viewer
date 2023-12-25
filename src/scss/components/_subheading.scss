@@ -1,0 +1,7 @@
+@use "../settings" as *;
+
+.subheading {
+  font-size: $med-font;
+  font-weight: $bold;
+  margin-block-end: $sm-space;
+}

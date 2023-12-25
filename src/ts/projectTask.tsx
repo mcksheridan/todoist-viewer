@@ -22,12 +22,12 @@ const ProjectTask = (task: Task_With_Section_Data): JSX.Element => {
       {task?.description ? (
         <p
           dangerouslySetInnerHTML={{ __html: task?.description }}
-          className="project-task__description"
+          className="subheading-text"
         />
       ) : (
         ""
       )}
-      <div className="project-task__info">
+      <div className="spaced-container subheading-text">
         {task?.due ? (
           <TextWithIcon
             elementType="time"
@@ -45,7 +45,7 @@ const ProjectTask = (task: Task_With_Section_Data): JSX.Element => {
         )}
       </div>
       {task?.labels ? (
-        <ul className="project-task__labels">
+        <ul className="project-task__labels subheading-text">
           {task.labels.map((label) => {
             return (
               <TextWithIcon

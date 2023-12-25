@@ -1,0 +1,22 @@
+@use "../settings" as *;
+
+.sort-by {
+	border: 3px solid $accent-color;
+	border-radius: $sm-space;
+	display: flex;
+	flex-direction: row;
+  font-size: $sm-font;
+	justify-content: space-between;
+
+  &__button {
+    align-items: center;
+    background: $active-color;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+
+    &:disabled {
+      background: $inactive-color;
+    }
+  }
+}

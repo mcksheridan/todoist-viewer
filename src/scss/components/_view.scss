@@ -1,0 +1,23 @@
+@use "../settings" as *;
+
+.view {
+  display: none;
+
+  &--visible {
+    background-color: $background-color;
+    border: 1px solid $accent-color;
+    border-radius: $med-space;
+    box-shadow: 0 0 $sm-space rgba($text-color, 0.2);
+    display: block;
+    padding: $med-space;
+    padding-block-end: $lg-space;
+    position: fixed;
+    right: $lg-space;
+    width: calc($sm-screen * 0.85);
+    z-index: 1;
+
+    @media (width >= $lg-screen) {
+      left: 55%;
+    }
+  }
+}

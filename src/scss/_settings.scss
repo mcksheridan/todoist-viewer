@@ -1,12 +1,39 @@
 // Colors
-$black: rgb(41 35 35 / 100%);
-$blue: rgb(74 75 108 / 100%);
-$brown: rgb(116 75 66 / 100%);
-$gold: rgb(188 163 110 / 100%);
-$green: rgb(95 95 82 / 100%);
-$light-tan: rgb(243 231 228);
-$red: rgb(104 40 52 / 100%);
-$tan: rgb(176 159 148 / 100%);
-$background-color: $tan;
+$black: rgb(32 32 32 / 100%);
+$blue: rgb(78 148 175 / 100%);
+$gray: rgb(109 109 109 / 100%);
+$green: rgb(81 145 43 / 100%);
+$lightgray: rgb(245 239 238 / 100%);
+$pink: rgb(250 231 228 / 100%);
+$red: rgb(204 76 80 / 100%);
+$white: rgb(255 255 255 / 100%);
+$background-color: $white;
+$accent-color: $lightgray;
+$active-color: $lightgray;
+$inactive-color: $white;
+$subtle-color: $gray;
 $text-color: $black;
-$font-family: serif;
+$warning-color: $red;
+
+// Fonts
+$lg-font: 1.25rem;
+$med-font: 0.9rem;
+$sm-font: 0.8125rem;
+$font-family: sans-serif;
+
+// Sizes
+$lg-screen: 50rem;
+$sm-screen: 20rem;
+
+// Spaces
+$xs-space: 0.1875rem;
+$sm-space: 0.3125rem;
+$med-space: 0.625rem;
+$lg-space: 1rem;
+$xl-space: 2rem;
+
+// Weight
+$extra-bold: 700;
+$bold: 600;
+$normal: 500;
+$light: 400;

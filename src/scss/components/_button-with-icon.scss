@@ -1,0 +1,32 @@
+@use "../settings" as *;
+
+.button-with-icon {
+  border: 1px solid transparent;
+  display: flex;
+  font-size: $sm-font;
+  margin-inline-start: calc($sm-space * -1);
+  padding: 5px;
+
+  &:hover {
+    background-color: $active-color;
+    border: 1px solid $active-color;
+    border-radius: $sm-space;
+  }
+
+  &:disabled {
+    background-color: unset;
+    border: 1px solid transparent;
+    border-radius: unset;
+    opacity: 0.5;
+  }
+
+  &__icon {
+    height: $sm-font;
+    padding-inline-end: $sm-space;
+
+    &--after {
+      padding-inline-end: 0;
+      padding-inline-start: $sm-space;
+    }
+  }
+}

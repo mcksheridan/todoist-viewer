@@ -21,14 +21,11 @@ const TasksPerPage = ({
   return (
     <div>
       <label className="label-with-icon">
-        <TextWithIcon
-          image={pageIcon.src}
-          text="Tasks per page"
-        />
+        <TextWithIcon image={pageIcon.src} text="Tasks per page" />
         <select className="label-with-icon__select label-with-icon__select--small">
           {sortedTaskNumbers.map((taskNumber) => (
             <option
-              key={"task-" + taskNumber}
+              key={`task-${taskNumber}`}
               onClick={() => action(taskNumber)}
               disabled={totalTasks < taskNumber}
             >

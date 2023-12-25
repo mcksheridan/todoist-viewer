@@ -1,0 +1,15 @@
+@use "../settings" as *;
+
+.label-with-icon {
+  display: flex;
+  justify-content: space-between;
+  justify-self: left;
+
+  &__select {
+    width: 55%;
+
+    &--small {
+      width: 55%;
+    }
+  }
+}

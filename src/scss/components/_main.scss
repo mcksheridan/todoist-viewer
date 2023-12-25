@@ -1,0 +1,19 @@
+@use "../settings" as *;
+
+.main {
+  background-color: $background-color;
+  color: $text-color;
+  font-size: $med-font;
+  font-weight: $normal;
+  margin: 0 auto;
+  max-width: $lg-screen;
+  min-width: $sm-screen;
+  overflow: auto;
+  padding-block-end: $xl-space;
+  padding-inline: $med-space;
+
+  &--frozen {
+    overflow: hidden;
+    max-height: 95vh;
+  }
+}

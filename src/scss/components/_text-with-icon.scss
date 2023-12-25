@@ -1,0 +1,12 @@
+@use "../settings" as *;
+
+.text-with-icon {
+  display: flex;
+  font-size: $sm-font;
+  padding-block: $sm-space;
+
+  &__icon {
+    height: $sm-font;
+    padding-inline-end: $sm-space;
+  }
+}
