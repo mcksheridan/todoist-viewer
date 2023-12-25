@@ -21,6 +21,7 @@ import NextIcon from '../assets/img/icon__next.png';
 import ResetIcon from '../assets/img/icon__reset.png';
 import SectionIcon from '../assets/img/icon__section.png';
 import SliderIcon from '../assets/img/icon__slider.png';
+import UpIcon from '../assets/img/icon__up.png';
 
 import type { Section, Task } from '@doist/todoist-api-typescript';
 
@@ -48,6 +49,8 @@ const sectionIcon = new Image();
 sectionIcon.src = SectionIcon;
 const sliderIcon = new Image();
 sliderIcon.src = SliderIcon;
+const upIcon = new Image();
+upIcon.src = UpIcon;
 
 const Project = () => {
   const [name, setName] = React.useState('Untitled Project');
@@ -175,6 +178,12 @@ const Project = () => {
         return task.labels.includes(label)
       })
     }))
+  }
+
+  const handleTopButton = () => {
+    main.current.scrollIntoView({
+      behavior: 'smooth'
+    })
   }
 
   return (
@@ -351,7 +360,13 @@ const Project = () => {
       {filteredTasks
         .slice(maxTasks * currentPage - maxTasks, maxTasks * currentPage)
         .map((task: Task_With_Section_Data) => <ProjectTask {...task} key={task.id} />
-        )}
+      )}
+      <span className="description">
+        <button onClick={() => handleTopButton()} className="description__container">
+          <img src={upIcon.src} alt="" className="description__icon" />
+          back to top
+        </button>
+      </span>
     </main>
   );
 }
