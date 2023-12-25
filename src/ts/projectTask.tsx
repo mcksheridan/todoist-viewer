@@ -1,8 +1,9 @@
-import * as React from 'react';
-import DateIcon from '../assets/img/icon__date.png';
-import LabelIcon from '../assets/img/icon__label.png';
-import SectionIcon from '../assets/img/icon__section.png';
-import type { Task_With_Section_Data } from './project';
+import * as React from "react";
+import DateIcon from "../assets/img/icon__date.png";
+import LabelIcon from "../assets/img/icon__label.png";
+import SectionIcon from "../assets/img/icon__section.png";
+import type { Task_With_Section_Data } from "./project";
+import TextWithIcon from "./cmp/textWithIcon";
 
 const dateIcon = new Image();
 dateIcon.src = DateIcon;
@@ -28,18 +29,16 @@ const ProjectTask = (task: Task_With_Section_Data): JSX.Element => {
       )}
       <div className="project-task__info">
         {task?.due ? (
-          <time className="project-task__date">
-            <img src={dateIcon.src} alt="" className="project-task__icon" />
-            {task.due.string}
-          </time>
+          <TextWithIcon
+            elementType="time"
+            image={dateIcon.src}
+            text={task.due.string}
+          />
         ) : (
           ""
         )}
         {task?.section ? (
-          <span className="project-task__section">
-            <img src={sectionIcon.src} alt="" className="project-task__icon" />
-            {task?.section?.name}
-          </span>
+          <TextWithIcon image={sectionIcon.src} text={task?.section?.name} />
         ) : (
           ""
         )}
@@ -48,10 +47,12 @@ const ProjectTask = (task: Task_With_Section_Data): JSX.Element => {
         <ul className="project-task__labels">
           {task.labels.map((label) => {
             return (
-              <li key={`${task.id}-${label}`}>
-                <img src={labelIcon.src} alt="" className="project-task__icon" />
-                {label}
-              </li>
+              <TextWithIcon
+                elementType="li"
+                image={labelIcon.src}
+                key={`${task.id}-${label}`}
+                text={label}
+              />
             );
           })}
         </ul>
@@ -60,6 +61,6 @@ const ProjectTask = (task: Task_With_Section_Data): JSX.Element => {
       )}
     </article>
   );
-}
+};
 
 export default ProjectTask;

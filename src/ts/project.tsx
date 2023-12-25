@@ -24,6 +24,7 @@ import SliderIcon from '../assets/img/icon__slider.png';
 import UpIcon from '../assets/img/icon__up.png';
 
 import type { Section, Task } from '@doist/todoist-api-typescript';
+import TextWithIcon from './cmp/textWithIcon';
 
 export type Task_With_Section_Data = Task & {
   section: Section;
@@ -189,12 +190,11 @@ const Project = () => {
   return (
     <main ref={main} className="main">
       <h1 className="heading">{name} Tasks</h1>
-      <p className="description">
-        <span className="description__container">
-          <img src={checkmarkIcon.src} alt="" className="description__icon" />
-          {tasks?.length} tasks ({tasks?.length - filteredTasks.length ?? 0}{" "}
-          hidden)
-        </span>
+      <div className="description">
+        <TextWithIcon
+          image={checkmarkIcon.src}
+          text={`${tasks?.length} tasks (${tasks?.length - filteredTasks.length ?? 0} hidden)`}
+        />
         <button
           type="button"
           onClick={() => handleViewMenu()}
@@ -204,7 +204,7 @@ const Project = () => {
           <img src={sliderIcon.src} alt="" className="description__icon" />
           View
         </button>
-      </p>
+      </div>
       <div className="view" ref={view}>
         <h2 className="subheading">View</h2>
         <TasksPerPage
@@ -240,10 +240,10 @@ const Project = () => {
           </li>
           <li>
             <label className="label-with-icon">
-              <span>
-                <img src={sectionIcon.src} alt="" className="label-with-icon__icon" />
-                Section
-              </span>
+              <TextWithIcon
+                image={sectionIcon.src}
+                text="Section"
+              />
               <select className="label-with-icon__select">
                 {sections
                   .sort((a, b) => {
@@ -264,10 +264,10 @@ const Project = () => {
           </li>
           <li>
             <label className="label-with-icon">
-              <span>
-                <img src={labelIcon.src} alt="" className="label-with-icon__icon" />
-                Label
-              </span>
+              <TextWithIcon
+                image={labelIcon.src}
+                text="Label"
+              />
               <select className="label-with-icon__select">
                 {labels
                   .sort((a, b) => {

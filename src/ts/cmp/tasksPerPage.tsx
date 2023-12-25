@@ -1,5 +1,6 @@
 import * as React from "react";
 import PageIcon from "../../assets/img/icon__page.png";
+import TextWithIcon from "./textWithIcon";
 
 type Tasks_Per_Page_type = {
   action: (value: React.SetStateAction<number>) => void;
@@ -20,10 +21,10 @@ const TasksPerPage = ({
   return (
     <div>
       <label className="label-with-icon">
-        <span>
-          <img src={pageIcon.src} alt="" className="label-with-icon__icon" />
-          Tasks per page
-        </span>
+        <TextWithIcon
+          image={pageIcon.src}
+          text="Tasks per page"
+        />
         <select className="label-with-icon__select label-with-icon__select--small">
           {sortedTaskNumbers.map((taskNumber) => (
             <option
