@@ -49,6 +49,11 @@ const Project = () => {
   const [currentPage, setCurrentPage] = React.useState(1);
   const [lastPage, setLastPage] = React.useState(1);
   const [dataLoaded, setDataLoaded] = React.useState(false);
+  const [loadingHeading, setLoadingHeading] = React.useState("Loading");
+  const [loadingMessage, setLoadingMessage] = React.useState(
+    "Fetching data from Todoist"
+  );
+  const [hasError, setHasError] = React.useState(false);
   const view = React.useRef<HTMLDivElement>(null);
   const main = React.useRef<HTMLDivElement>(null);
 
@@ -344,7 +349,11 @@ const Project = () => {
           </span>
         </>
       ) : (
-        <LoadingScreen />
+        <LoadingScreen
+          heading={loadingHeading}
+          message={loadingMessage}
+          hasAnimation={!hasError}
+        />
       )}
     </main>
   );

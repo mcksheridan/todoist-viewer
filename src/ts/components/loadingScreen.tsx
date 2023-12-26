@@ -2,8 +2,14 @@ import * as React from "react";
 import ButtonWithIcon from "./buttonWithIcon";
 import { playIcon, stopIcon } from "../utilities/images";
 
-const LoadingScreen = (): JSX.Element => {
-  const [isPlaying, setIsPlaying] = React.useState(true);
+import type { Loading_Screen } from "../types";
+
+const LoadingScreen = ({
+  hasAnimation = true,
+  heading,
+  message,
+}: Loading_Screen): JSX.Element => {
+  const [isPlaying, setIsPlaying] = React.useState(hasAnimation);
 
   const headerClasses = "heading loading__heading";
 
@@ -11,14 +17,14 @@ const LoadingScreen = (): JSX.Element => {
     <div className="loading">
       <h1
         className={
-          isPlaying
+          hasAnimation && isPlaying
             ? headerClasses + " loading__heading--animated"
             : headerClasses
         }
       >
-        Loading
+        {heading}
       </h1>
-      <p className="subheading-text">Fetching data from Todoist</p>
+      <p className="subheading-text">{message}</p>
       <div className="loading__control">
         <ButtonWithIcon
           action={() => setIsPlaying(!isPlaying)}

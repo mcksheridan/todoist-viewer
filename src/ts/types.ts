@@ -9,6 +9,12 @@ type Button_With_Icon = {
   textBeforeIcon?: boolean;
 };
 
+type Loading_Screen = {
+  hasAnimation?: boolean;
+  heading: string;
+  message: string;
+};
+
 type Tasks_Per_Page = {
   action: (value: React.SetStateAction<number>) => void;
   taskNumbers: number[];
@@ -28,6 +34,7 @@ type Text_With_Icon = {
 
 export {
   Button_With_Icon,
+  Loading_Screen,
   Tasks_Per_Page,
   Task_With_Section_Data,
   Text_With_Icon,
