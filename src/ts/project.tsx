@@ -12,7 +12,7 @@ import {
   sortTasksByDate,
   sortTasksBySection,
 } from "./utils/tasks";
-import ProjectTask from "./projectTask";
+import ProjectTask from "./cmp/projectTask";
 import getHtml from "./utils/convertMarkdown";
 import TasksPerPage from "./cmp/tasksPerPage";
 import BackIcon from "../assets/img/icon__back.png";
