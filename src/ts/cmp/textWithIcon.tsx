@@ -26,11 +26,7 @@ const TextWithIcon = ({
   }
 
   if (elementType === "li") {
-    return (
-      <li className={CLASS_NAME}>
-        {content}
-      </li>
-    );
+    return <li className={CLASS_NAME}>{content}</li>;
   }
 
   return <span className={CLASS_NAME}>{content}</span>;

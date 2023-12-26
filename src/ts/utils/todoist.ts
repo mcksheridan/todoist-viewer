@@ -1,7 +1,7 @@
-import { Section, TodoistApi } from "@doist/todoist-api-typescript"
+import { Section, TodoistApi } from "@doist/todoist-api-typescript";
 import type { Task_With_Section_Data } from "../project";
 
-const api = new TodoistApi(process.env.TODOIST_API)
+const api = new TodoistApi(process.env.TODOIST_API);
 
 const getProjectName = async () => {
   try {
@@ -11,16 +11,18 @@ const getProjectName = async () => {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
 const getProjectTasks = async () => {
   try {
-    const activeTasks = await api.getTasks({projectId: process.env.PROJECT_ID})
+    const activeTasks = await api.getTasks({
+      projectId: process.env.PROJECT_ID,
+    });
     return activeTasks as Task_With_Section_Data[];
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 const getProjectSections = async (sectionIds: string[]) => {
   const sections: Section[] = [];
@@ -35,6 +37,6 @@ const getProjectSections = async (sectionIds: string[]) => {
     }
   }
   return sections;
-}
+};
 
-export { getProjectName, getProjectTasks, getProjectSections }
+export { getProjectName, getProjectTasks, getProjectSections };
