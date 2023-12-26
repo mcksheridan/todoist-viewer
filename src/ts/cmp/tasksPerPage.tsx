@@ -22,11 +22,14 @@ const TasksPerPage = ({
     <div>
       <label className="label-with-icon">
         <TextWithIcon image={pageIcon.src} text="Tasks per page" />
-        <select className="label-with-icon__select label-with-icon__select--small">
+        <select
+          className="label-with-icon__select label-with-icon__select--small"
+          onChange={(event) => action(parseInt(event.target.value))}
+        >
           {sortedTaskNumbers.map((taskNumber) => (
             <option
               key={`task-${taskNumber}`}
-              onClick={() => action(taskNumber)}
+              value={taskNumber}
               disabled={totalTasks < taskNumber}
             >
               {taskNumber}

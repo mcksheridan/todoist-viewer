@@ -244,7 +244,10 @@ const Project = () => {
                 image={sectionIcon.src}
                 text="Section"
               />
-              <select className="label-with-icon__select">
+              <select
+                className="label-with-icon__select"
+                onChange={(event) => filterTasksBySection(event.target.value)}
+              >
                 {sections
                   .sort((a, b) => {
                     return b?.order - a?.order;
@@ -253,7 +256,7 @@ const Project = () => {
                     return (
                       <option
                         key={section?.id}
-                        onClick={() => filterTasksBySection(section?.id)}
+                        value={section?.id}
                       >
                         {section?.name}
                       </option>
@@ -268,7 +271,10 @@ const Project = () => {
                 image={labelIcon.src}
                 text="Label"
               />
-              <select className="label-with-icon__select">
+              <select
+                className="label-with-icon__select"
+                onChange={(event) => filterTasksByLabel(event.target.value)}
+              >
                 {labels
                   .sort((a, b) => {
                     const labelA = a.toLowerCase();
@@ -288,7 +294,7 @@ const Project = () => {
                     return (
                       <option
                         key={label}
-                        onClick={() => filterTasksByLabel(label)}
+                        value={label}
                       >
                         {label}
                       </option>
