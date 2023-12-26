@@ -2,13 +2,13 @@ import * as React from "react";
 import TextWithIcon from "./textWithIcon";
 import { pageIcon } from "../utilities/images";
 
-import type { Tasks_Per_Page_type } from "../types";
+import type { Tasks_Per_Page } from "../types";
 
 const TasksPerPage = ({
   action,
   taskNumbers,
   totalTasks,
-}: Tasks_Per_Page_type): JSX.Element | JSX.Element[] => {
+}: Tasks_Per_Page): JSX.Element | JSX.Element[] => {
   const sortedTaskNumbers = taskNumbers.sort((a, b) => a - b);
 
   return (
