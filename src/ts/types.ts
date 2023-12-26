@@ -15,7 +15,7 @@ type Tasks_Per_Page = {
 };
 
 type Task_With_Section_Data = Task & {
-  section: Section;
+  section?: Section;
 };
 
 type Text_With_Icon = {

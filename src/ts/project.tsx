@@ -31,13 +31,16 @@ import ProjectTask from "./components/projectTask";
 import TasksPerPage from "./components/tasksPerPage";
 import TextWithIcon from "./components/textWithIcon";
 
+import type { Section, Task } from "@doist/todoist-api-typescript";
 import type { Task_With_Section_Data } from "./types";
 
 const Project = () => {
   const [name, setName] = React.useState("Untitled Project");
-  const [tasks, setTasks] = React.useState([]);
-  const [filteredTasks, setFilteredTasks] = React.useState([]);
-  const [sections, setSections] = React.useState([]);
+  const [tasks, setTasks] = React.useState<Task[]>([]);
+  const [filteredTasks, setFilteredTasks] = React.useState<
+    Task_With_Section_Data[]
+  >([]);
+  const [sections, setSections] = React.useState<Section[]>([]);
   const [labels, setLabels] = React.useState<string[]>([]);
   const [inputLabels, setInputLabels] = React.useState<string[]>([]);
   const [sort, setSort] = React.useState<"Date" | "Section">("Date");

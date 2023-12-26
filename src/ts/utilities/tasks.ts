@@ -1,7 +1,7 @@
 import type { Task, Section } from "@doist/todoist-api-typescript";
 import type { Task_With_Section_Data } from "../types";
 
-const getSectionIds = (tasks: Task[]) => {
+const getSectionIds = (tasks: Task[]): string[] => {
   const allSectionIds = tasks.map((task) => task.sectionId);
   const uniqueSectionIds = allSectionIds.filter(
     (id, i, arr) => arr.indexOf(id) === i
@@ -18,7 +18,10 @@ const getTaskLabels = (tasks: Task[]): string[] => {
   return labels;
 };
 
-const getTaskSection = (sections: Section[], taskSectionId: string) => {
+const getTaskSection = (
+  sections: Section[],
+  taskSectionId: string
+): Section => {
   const resultArr = sections.filter((section) => {
     return section?.id === taskSectionId;
   });
@@ -26,14 +29,14 @@ const getTaskSection = (sections: Section[], taskSectionId: string) => {
   return result;
 };
 
-const removeBulletPoints = (string: string) => {
+const removeBulletPoints = (string: string): string => {
   if (string.startsWith("* ")) {
     return string.slice(2);
   }
   return string;
 };
 
-const sortTasksByDate = (tasks: Task[]) => {
+const sortTasksByDate = (tasks: Task[]): Task[] => {
   return tasks.sort((a, b) => {
     const dateA = new Date(a?.due?.datetime ?? a?.due?.date);
     const dateB = new Date(b?.due?.datetime ?? b?.due?.date);
@@ -47,7 +50,9 @@ const sortTasksByDate = (tasks: Task[]) => {
   });
 };
 
-const sortTasksBySection = (tasks: Task_With_Section_Data[]) => {
+const sortTasksBySection = (
+  tasks: Task_With_Section_Data[]
+): Task_With_Section_Data[] => {
   return tasks.sort((a, b) => {
     if (a?.section?.order > b?.section?.order) {
       return -1;
