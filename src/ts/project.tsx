@@ -219,7 +219,7 @@ const Project = () => {
             />
             <ButtonWithIcon
               action={() => handleViewMenu()}
-              disabled={filteredTasks?.length < 1}
+              disabled={tasks?.length < 1}
               image={sliderIcon.src}
               text="View"
               toggleTextDisplay
