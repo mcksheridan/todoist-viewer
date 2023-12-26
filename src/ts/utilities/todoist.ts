@@ -35,6 +35,7 @@ const getProjectSections = async (sectionIds: string[]): Promise<Section[]> => {
       i += 1;
     } catch (error) {
       console.error(error);
+      return;
     }
   }
   return sections;

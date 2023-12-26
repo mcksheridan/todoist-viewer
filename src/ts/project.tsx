@@ -57,23 +57,35 @@ const Project = () => {
   const view = React.useRef<HTMLDivElement>(null);
   const main = React.useRef<HTMLDivElement>(null);
 
+  const throwError = (message?: string) => {
+    setDataLoaded(false);
+    setHasError(true);
+    setLoadingHeading("error");
+    setLoadingMessage(message ?? "An error occurred");
+  };
+
   React.useEffect(() => {
     const fetchData = async () => {
-      const projectName = await getProjectName();
-      const projectTasks = await getProjectTasks();
-      let i = 0;
-      while (i < projectTasks.length) {
-        projectTasks[i].content = await getHtml(
-          removeBulletPoints(projectTasks[i].content)
-        );
-        projectTasks[i].description = await getHtml(
-          projectTasks[i].description
-        );
-        i += 1;
+      try {
+        const projectName = await getProjectName();
+        const projectTasks = await getProjectTasks();
+        let i = 0;
+        while (i < projectTasks.length) {
+          projectTasks[i].content = await getHtml(
+            removeBulletPoints(projectTasks[i].content)
+          );
+          projectTasks[i].description = await getHtml(
+            projectTasks[i].description
+          );
+          i += 1;
+        }
+        setName(projectName);
+        setTasks(sortTasksByDate(projectTasks));
+        setDataLoaded(true);
+      } catch (error) {
+        throwError(error?.message);
+        console.error(error);
       }
-      setName(projectName);
-      setTasks(sortTasksByDate(projectTasks));
-      setDataLoaded(true);
     };
     fetchData();
   }, []);
@@ -92,16 +104,21 @@ const Project = () => {
 
   React.useEffect(() => {
     (async () => {
-      const sectionIds = getSectionIds(filteredTasks);
-      const projectSections = await getProjectSections(sectionIds);
-      setSections(projectSections);
-      let i = 0;
-      while (i < filteredTasks.length) {
-        filteredTasks[i].section = getTaskSection(
-          projectSections,
-          filteredTasks[i].sectionId
-        );
-        i += 1;
+      try {
+        const sectionIds = getSectionIds(filteredTasks);
+        const projectSections = await getProjectSections(sectionIds);
+        setSections(projectSections);
+        let i = 0;
+        while (i < filteredTasks.length) {
+          filteredTasks[i].section = getTaskSection(
+            projectSections,
+            filteredTasks[i].sectionId
+          );
+          i += 1;
+        }
+      } catch (error) {
+        throwError(error?.message);
+        console.error(error);
       }
     })();
   }, [filteredTasks]);
