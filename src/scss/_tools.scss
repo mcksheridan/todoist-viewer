@@ -1,44 +1,46 @@
 @use "settings" as *;
 
-$xl-font: 2rem;
-$lg-font: 1.25rem;
-$med-font: 0.9rem;
-$sm-font: 0.8125rem;
+$sm-font: 1.1375rem;
+$sm-font-desktop: calc($sm-font / 1.4);
+$med-font: 1.25rem;
+$med-font-desktop: calc($med-font / 1.4);
+$lg-font: 1.75rem;
+$lg-font-desktop: calc($lg-font / 1.4);
 
 @mixin font-size($size) {
-  @if  $size == "sm" {
-    font-size: calc($sm-font * 2);
+  @if $size == "sm" {
+    font-size: calc($sm-font);
 
     @media (min-width: $med-screen) {
-      font-size: $sm-font;
+      font-size: $sm-font-desktop;
     }
   }
 
-  @if  $size == "med" {
-    font-size: calc($med-font * 2);
+  @if $size == "med" {
+    font-size: calc($med-font * 1.4);
 
     @media (min-width: $med-screen) {
-      font-size: $med-font;
+      font-size: $med-font-desktop;
     }
   }
 
-  @if  $size == "lg" {
-    font-size: calc($lg-font * 2);
-    line-height: calc($lg-font * 2 * 1.25);
+  @if $size == "lg" {
+    font-size: calc($lg-font);
+    line-height: calc($lg-font * 1.25);
 
     @media (min-width: $med-screen) {
-      font-size: $lg-font;
-      line-height: calc($lg-font * 1.25);
+      font-size: $lg-font-desktop;
+      line-height: calc($lg-font-desktop * 1.25);
     }
   }
 }
 
 @mixin height($size) {
-  @if  $size == "sm" {
-    height: calc($sm-font * 2);
+  @if $size == "sm" {
+    height: calc($sm-font);
 
     @media (min-width: $med-screen) {
-      height: $sm-font;
+      height: $sm-font-desktop;
     }
   }
 }

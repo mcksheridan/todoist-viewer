@@ -32,4 +32,26 @@
       padding-inline-start: $sm-space;
     }
   }
+
+  &__text {
+    &--hidden {
+      position: absolute;
+      height: 1px;
+      width: 1px;
+      overflow: hidden;
+      white-space: nowrap;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+
+      @media (min-width: $med-screen) {
+        position: unset;
+        height: unset;
+        width: unset;
+        overflow: unset;
+        white-space: unset;
+        clip: unset;
+        clip-path: unset;
+      }
+    }
+  }
 }

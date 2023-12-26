@@ -5,6 +5,7 @@ type Button_With_Icon = {
   disabled?: boolean;
   image: string;
   text: string;
+  toggleTextDisplay?: boolean;
   textBeforeIcon?: boolean;
 };
 

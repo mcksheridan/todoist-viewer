@@ -7,8 +7,21 @@ const ButtonWithIcon = ({
   disabled,
   image,
   text,
+  toggleTextDisplay,
   textBeforeIcon,
 }: Button_With_Icon): JSX.Element => {
+  const textElement = (
+    <span
+      className={
+        toggleTextDisplay
+          ? "button-with-icon__text button-with-icon__text--hidden"
+          : "button-with-icon__text"
+      }
+    >
+      {text}
+    </span>
+  );
+
   return (
     <button
       type="button"
@@ -16,7 +29,7 @@ const ButtonWithIcon = ({
       disabled={disabled}
       className="button-with-icon"
     >
-      {textBeforeIcon && text}
+      {textBeforeIcon && textElement}
       <img
         src={image}
         alt=""
@@ -26,7 +39,7 @@ const ButtonWithIcon = ({
             : "button-with-icon__icon"
         }
       />
-      {!textBeforeIcon && text}
+      {!textBeforeIcon && textElement}
     </button>
   );
 };

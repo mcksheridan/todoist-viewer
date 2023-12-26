@@ -190,6 +190,7 @@ const Project = () => {
           disabled={filteredTasks?.length < 1}
           image={sliderIcon.src}
           text="View"
+          toggleTextDisplay
         />
       </div>
       <div className="view" ref={view}>
@@ -288,12 +289,14 @@ const Project = () => {
           disabled={currentPage === 1}
           image={firstIcon.src}
           text="first"
+          toggleTextDisplay
         />
         <ButtonWithIcon
           action={() => setCurrentPage(currentPage - 1)}
           disabled={currentPage === 1}
           image={backIcon.src}
           text="back"
+          toggleTextDisplay
         />
         <span className="page-container__current-page">
           {currentPage} / {lastPage}
@@ -304,6 +307,7 @@ const Project = () => {
           image={nextIcon.src}
           text="next"
           textBeforeIcon
+          toggleTextDisplay
         />
         <ButtonWithIcon
           action={() => setCurrentPage(lastPage)}
@@ -311,6 +315,7 @@ const Project = () => {
           image={lastIcon.src}
           text="last"
           textBeforeIcon
+          toggleTextDisplay
         />
       </div>
       {filteredTasks
