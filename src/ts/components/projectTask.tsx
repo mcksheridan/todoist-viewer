@@ -1,17 +1,8 @@
 import * as React from "react";
 import TextWithIcon from "./textWithIcon";
-import DateIcon from "../../assets/img/icon__date.png";
-import LabelIcon from "../../assets/img/icon__label.png";
-import SectionIcon from "../../assets/img/icon__section.png";
+import { dateIcon, labelIcon, sectionIcon } from "../utilities/images";
 
 import type { Task_With_Section_Data } from "../project";
-
-const dateIcon = new Image();
-dateIcon.src = DateIcon;
-const labelIcon = new Image();
-labelIcon.src = LabelIcon;
-const sectionIcon = new Image();
-sectionIcon.src = SectionIcon;
 
 const ProjectTask = (task: Task_With_Section_Data): JSX.Element => {
   return (

@@ -12,51 +12,30 @@ import {
   sortTasksByDate,
   sortTasksBySection,
 } from "./utilities/tasks";
+import {
+  backIcon,
+  checkmarkIcon,
+  dateIcon,
+  firstIcon,
+  labelIcon,
+  lastIcon,
+  nextIcon,
+  resetIcon,
+  sectionIcon,
+  sliderIcon,
+  upIcon,
+} from "./utilities/images";
 import ButtonWithIcon from "./components/buttonWithIcon";
 import getHtml from "./utilities/convertMarkdown";
 import ProjectTask from "./components/projectTask";
 import TasksPerPage from "./components/tasksPerPage";
 import TextWithIcon from "./components/textWithIcon";
-import BackIcon from "../assets/img/icon__back.png";
-import CheckmarkIcon from "../assets/img/icon__checkmark.png";
-import DateIcon from "../assets/img/icon__date.png";
-import FirstIcon from "../assets/img/icon__first.png";
-import LabelIcon from "../assets/img/icon__label.png";
-import LastIcon from "../assets/img/icon__last.png";
-import NextIcon from "../assets/img/icon__next.png";
-import ResetIcon from "../assets/img/icon__reset.png";
-import SectionIcon from "../assets/img/icon__section.png";
-import SliderIcon from "../assets/img/icon__slider.png";
-import UpIcon from "../assets/img/icon__up.png";
 
 import type { Section, Task } from "@doist/todoist-api-typescript";
 
 export type Task_With_Section_Data = Task & {
   section: Section;
 };
-
-const backIcon = new Image();
-backIcon.src = BackIcon;
-const checkmarkIcon = new Image();
-checkmarkIcon.src = CheckmarkIcon;
-const dateIcon = new Image();
-dateIcon.src = DateIcon;
-const firstIcon = new Image();
-firstIcon.src = FirstIcon;
-const labelIcon = new Image();
-labelIcon.src = LabelIcon;
-const lastIcon = new Image();
-lastIcon.src = LastIcon;
-const nextIcon = new Image();
-nextIcon.src = NextIcon;
-const resetIcon = new Image();
-resetIcon.src = ResetIcon;
-const sectionIcon = new Image();
-sectionIcon.src = SectionIcon;
-const sliderIcon = new Image();
-sliderIcon.src = SliderIcon;
-const upIcon = new Image();
-upIcon.src = UpIcon;
 
 const Project = () => {
   const [name, setName] = React.useState("Untitled Project");

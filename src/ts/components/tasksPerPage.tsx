@@ -1,15 +1,12 @@
 import * as React from "react";
 import TextWithIcon from "./textWithIcon";
-import PageIcon from "../../assets/img/icon__page.png";
+import { pageIcon } from "../utilities/images";
 
 type Tasks_Per_Page_type = {
   action: (value: React.SetStateAction<number>) => void;
   taskNumbers: number[];
   totalTasks: number;
 };
-
-const pageIcon = new Image();
-pageIcon.src = PageIcon;
 
 const TasksPerPage = ({
   action,
