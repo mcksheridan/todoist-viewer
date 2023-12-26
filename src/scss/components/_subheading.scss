@@ -1,7 +1,9 @@
 @use "../settings" as *;
+@use "../tools" as *;
 
 .subheading {
-  font-size: $med-font;
+  @include font-size(med);
+
   font-weight: $bold;
   margin-block-end: $sm-space;
 }

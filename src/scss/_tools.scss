@@ -1,0 +1,44 @@
+@use "settings" as *;
+
+$xl-font: 2rem;
+$lg-font: 1.25rem;
+$med-font: 0.9rem;
+$sm-font: 0.8125rem;
+
+@mixin font-size($size) {
+  @if  $size == "sm" {
+    font-size: calc($sm-font * 2);
+
+    @media (min-width: $med-screen) {
+      font-size: $sm-font;
+    }
+  }
+
+  @if  $size == "med" {
+    font-size: calc($med-font * 2);
+
+    @media (min-width: $med-screen) {
+      font-size: $med-font;
+    }
+  }
+
+  @if  $size == "lg" {
+    font-size: calc($lg-font * 2);
+    line-height: calc($lg-font * 2 * 1.25);
+
+    @media (min-width: $med-screen) {
+      font-size: $lg-font;
+      line-height: calc($lg-font * 1.25);
+    }
+  }
+}
+
+@mixin height($size) {
+  @if  $size == "sm" {
+    height: calc($sm-font * 2);
+
+    @media (min-width: $med-screen) {
+      height: $sm-font;
+    }
+  }
+}

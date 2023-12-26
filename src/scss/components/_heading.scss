@@ -1,7 +1,8 @@
 @use "../settings" as *;
+@use "../tools" as *;
 
 .heading {
-  font-size: $lg-font;
+  @include font-size(lg);
+
   font-weight: $extra-bold;
-  line-height: calc($lg-font * 1.25);
 }

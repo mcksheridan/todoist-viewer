@@ -1,4 +1,5 @@
 @use "../settings" as *;
+@use "../tools" as *;
 
 .project-task {
   margin-block: $xl-space;
@@ -6,7 +7,7 @@
   padding: $xs-space;
 
   &__content {
-    font-size: $med-font;
+    @include font-size(med);
   }
 
   &__labels {

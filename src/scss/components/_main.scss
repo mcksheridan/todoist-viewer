@@ -1,9 +1,11 @@
 @use "../settings" as *;
+@use "../tools" as *;
 
 .main {
+  @include font-size(med);
+
   background-color: $background-color;
   color: $text-color;
-  font-size: $med-font;
   font-weight: $normal;
   margin: 0 auto;
   max-width: $lg-screen;

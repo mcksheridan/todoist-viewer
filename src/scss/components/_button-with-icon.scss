@@ -1,9 +1,11 @@
 @use "../settings" as *;
+@use "../tools" as *;
 
 .button-with-icon {
+  @include font-size(sm);
+
   border: 1px solid transparent;
   display: flex;
-  font-size: $sm-font;
   margin-inline-start: calc($sm-space * -1);
   padding: 5px;
 
@@ -21,7 +23,8 @@
   }
 
   &__icon {
-    height: $sm-font;
+    @include height(sm);
+
     padding-inline-end: $sm-space;
 
     &--after {

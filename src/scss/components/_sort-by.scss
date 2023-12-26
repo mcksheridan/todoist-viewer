@@ -1,12 +1,14 @@
 @use "../settings" as *;
+@use "../tools" as *;
 
 .sort-by {
-	border: 3px solid $accent-color;
-	border-radius: $sm-space;
-	display: flex;
-	flex-direction: row;
-  font-size: $sm-font;
-	justify-content: space-between;
+  @include font-size(sm);
+
+  border: 3px solid $accent-color;
+  border-radius: $sm-space;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 
   &__button {
     align-items: center;

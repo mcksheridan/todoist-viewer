@@ -1,12 +1,15 @@
 @use "../settings" as *;
+@use "../tools" as *;
 
 .text-with-icon {
+  @include font-size(sm);
+
   display: flex;
-  font-size: $sm-font;
   padding-block: $sm-space;
 
   &__icon {
-    height: $sm-font;
+    @include height(sm);
+
     padding-inline-end: $sm-space;
   }
 }

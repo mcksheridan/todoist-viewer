@@ -1,8 +1,10 @@
 @use "./settings" as *;
+@use "./tools" as *;
 
 .subheading-text {
+  @include font-size(sm);
+
   color: $subtle-color;
-  font-size: $sm-font;
   font-weight: $light;
 }
 
