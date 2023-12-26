@@ -109,6 +109,11 @@ const Project = () => {
       main.current.classList.remove("main--frozen");
     };
 
+    const removeMenuEventListeners = () => {
+      removeEventListener("mousedown", handleMousedown);
+      removeEventListener("keydown", handleKeydown);
+    };
+
     const handleMousedown = (event: MouseEvent) => {
       const viewCoordinates = view.current.getBoundingClientRect();
       const viewXSpace = viewCoordinates.x + viewCoordinates.width;
@@ -118,14 +123,14 @@ const Project = () => {
         !(viewCoordinates.y <= event.y && event.y <= viewYSpace)
       ) {
         hideViewMenu();
-        removeEventListener("mousedown", handleMousedown);
+        removeMenuEventListeners();
       }
     };
 
     const handleKeydown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         hideViewMenu();
-        removeEventListener("keydown", handleKeydown);
+        removeMenuEventListeners();
       }
     };
 
