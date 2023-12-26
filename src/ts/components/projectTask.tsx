@@ -1,9 +1,10 @@
 import * as React from "react";
+import TextWithIcon from "./textWithIcon";
 import DateIcon from "../../assets/img/icon__date.png";
 import LabelIcon from "../../assets/img/icon__label.png";
 import SectionIcon from "../../assets/img/icon__section.png";
+
 import type { Task_With_Section_Data } from "../project";
-import TextWithIcon from "./textWithIcon";
 
 const dateIcon = new Image();
 dateIcon.src = DateIcon;

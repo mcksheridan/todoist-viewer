@@ -12,9 +12,11 @@ import {
   sortTasksByDate,
   sortTasksBySection,
 } from "./utilities/tasks";
-import ProjectTask from "./components/projectTask";
+import ButtonWithIcon from "./components/buttonWithIcon";
 import getHtml from "./utilities/convertMarkdown";
+import ProjectTask from "./components/projectTask";
 import TasksPerPage from "./components/tasksPerPage";
+import TextWithIcon from "./components/textWithIcon";
 import BackIcon from "../assets/img/icon__back.png";
 import CheckmarkIcon from "../assets/img/icon__checkmark.png";
 import DateIcon from "../assets/img/icon__date.png";
@@ -28,8 +30,6 @@ import SliderIcon from "../assets/img/icon__slider.png";
 import UpIcon from "../assets/img/icon__up.png";
 
 import type { Section, Task } from "@doist/todoist-api-typescript";
-import TextWithIcon from "./components/textWithIcon";
-import ButtonWithIcon from "./components/buttonWithIcon";
 
 export type Task_With_Section_Data = Task & {
   section: Section;

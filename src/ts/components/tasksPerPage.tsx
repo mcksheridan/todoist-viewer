@@ -1,6 +1,6 @@
 import * as React from "react";
-import PageIcon from "../../assets/img/icon__page.png";
 import TextWithIcon from "./textWithIcon";
+import PageIcon from "../../assets/img/icon__page.png";
 
 type Tasks_Per_Page_type = {
   action: (value: React.SetStateAction<number>) => void;
