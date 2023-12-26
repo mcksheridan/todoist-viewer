@@ -6,9 +6,11 @@ import LabelIcon from "../../assets/img/icon__label.png";
 import LastIcon from "../../assets/img/icon__last.png";
 import NextIcon from "../../assets/img/icon__next.png";
 import PageIcon from "../../assets/img/icon__page.png";
+import PlayIcon from "../../assets/img/icon__play.png";
 import ResetIcon from "../../assets/img/icon__reset.png";
 import SectionIcon from "../../assets/img/icon__section.png";
 import SliderIcon from "../../assets/img/icon__slider.png";
+import StopIcon from "../../assets/img/icon__stop.png";
 import UpIcon from "../../assets/img/icon__up.png";
 
 const backIcon = new Image();
@@ -38,11 +40,17 @@ resetIcon.src = ResetIcon;
 const pageIcon = new Image();
 pageIcon.src = PageIcon;
 
+const playIcon = new Image();
+playIcon.src = PlayIcon;
+
 const sectionIcon = new Image();
 sectionIcon.src = SectionIcon;
 
 const sliderIcon = new Image();
 sliderIcon.src = SliderIcon;
+
+const stopIcon = new Image();
+stopIcon.src = StopIcon;
 
 const upIcon = new Image();
 upIcon.src = UpIcon;
@@ -56,8 +64,10 @@ export {
   lastIcon,
   nextIcon,
   pageIcon,
+  playIcon,
   resetIcon,
   sectionIcon,
   sliderIcon,
+  stopIcon,
   upIcon,
 };
