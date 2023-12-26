@@ -3,7 +3,7 @@ import {
   getProjectName,
   getProjectSections,
   getProjectTasks,
-} from "./utils/todoist";
+} from "./utilities/todoist";
 import {
   getSectionIds,
   getTaskLabels,
@@ -11,10 +11,10 @@ import {
   removeBulletPoints,
   sortTasksByDate,
   sortTasksBySection,
-} from "./utils/tasks";
-import ProjectTask from "./cmp/projectTask";
-import getHtml from "./utils/convertMarkdown";
-import TasksPerPage from "./cmp/tasksPerPage";
+} from "./utilities/tasks";
+import ProjectTask from "./components/projectTask";
+import getHtml from "./utilities/convertMarkdown";
+import TasksPerPage from "./components/tasksPerPage";
 import BackIcon from "../assets/img/icon__back.png";
 import CheckmarkIcon from "../assets/img/icon__checkmark.png";
 import DateIcon from "../assets/img/icon__date.png";
@@ -28,8 +28,8 @@ import SliderIcon from "../assets/img/icon__slider.png";
 import UpIcon from "../assets/img/icon__up.png";
 
 import type { Section, Task } from "@doist/todoist-api-typescript";
-import TextWithIcon from "./cmp/textWithIcon";
-import ButtonWithIcon from "./cmp/buttonWithIcon";
+import TextWithIcon from "./components/textWithIcon";
+import ButtonWithIcon from "./components/buttonWithIcon";
 
 export type Task_With_Section_Data = Task & {
   section: Section;
