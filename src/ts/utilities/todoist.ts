@@ -30,8 +30,10 @@ const getProjectSections = async (sectionIds: string[]): Promise<Section[]> => {
   let i = 0;
   while (i < sectionIds.length) {
     try {
-      const section = await api.getSection(sectionIds[i]);
-      sections.push(section);
+      if (sectionIds[i]) {
+        const section = await api.getSection(sectionIds[i]);
+        sections.push(section);
+      }
       i += 1;
     } catch (error) {
       console.error(error);
