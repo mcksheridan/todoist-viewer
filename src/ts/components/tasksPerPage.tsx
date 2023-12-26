@@ -2,11 +2,7 @@ import * as React from "react";
 import TextWithIcon from "./textWithIcon";
 import { pageIcon } from "../utilities/images";
 
-type Tasks_Per_Page_type = {
-  action: (value: React.SetStateAction<number>) => void;
-  taskNumbers: number[];
-  totalTasks: number;
-};
+import type { Tasks_Per_Page_type } from "../types";
 
 const TasksPerPage = ({
   action,

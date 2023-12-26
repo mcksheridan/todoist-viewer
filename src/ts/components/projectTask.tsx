@@ -2,7 +2,7 @@ import * as React from "react";
 import TextWithIcon from "./textWithIcon";
 import { dateIcon, labelIcon, sectionIcon } from "../utilities/images";
 
-import type { Task_With_Section_Data } from "../project";
+import type { Task_With_Section_Data } from "../types";
 
 const ProjectTask = (task: Task_With_Section_Data): JSX.Element => {
   return (

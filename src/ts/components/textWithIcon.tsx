@@ -1,11 +1,6 @@
 import * as React from "react";
 
-type Text_With_Icon = {
-  elementType?: "time" | "li";
-  hasWarning?: boolean;
-  image: string;
-  text: string;
-};
+import type { Text_With_Icon } from "../types";
 
 const TextWithIcon = ({
   elementType,

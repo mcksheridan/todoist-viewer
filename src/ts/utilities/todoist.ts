@@ -1,6 +1,6 @@
 import { TodoistApi } from "@doist/todoist-api-typescript";
 import type { Section } from "@doist/todoist-api-typescript";
-import type { Task_With_Section_Data } from "../project";
+import type { Task_With_Section_Data } from "../types";
 
 const api = new TodoistApi(process.env.TODOIST_API);
 

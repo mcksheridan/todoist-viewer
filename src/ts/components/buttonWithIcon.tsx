@@ -1,12 +1,6 @@
 import * as React from "react";
 
-type Button_With_Icon = {
-  action: () => void;
-  disabled?: boolean;
-  image: string;
-  text: string;
-  textBeforeIcon?: boolean;
-};
+import type { Button_With_Icon } from "../types";
 
 const ButtonWithIcon = ({
   action,

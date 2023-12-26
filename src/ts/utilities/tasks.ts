@@ -1,5 +1,5 @@
 import type { Task, Section } from "@doist/todoist-api-typescript";
-import type { Task_With_Section_Data } from "../project";
+import type { Task_With_Section_Data } from "../types";
 
 const getSectionIds = (tasks: Task[]) => {
   const allSectionIds = tasks.map((task) => task.sectionId);

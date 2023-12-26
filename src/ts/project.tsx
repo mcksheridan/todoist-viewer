@@ -31,11 +31,7 @@ import ProjectTask from "./components/projectTask";
 import TasksPerPage from "./components/tasksPerPage";
 import TextWithIcon from "./components/textWithIcon";
 
-import type { Section, Task } from "@doist/todoist-api-typescript";
-
-export type Task_With_Section_Data = Task & {
-  section: Section;
-};
+import type { Task_With_Section_Data } from "./types";
 
 const Project = () => {
   const [name, setName] = React.useState("Untitled Project");
