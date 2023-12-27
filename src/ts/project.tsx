@@ -73,6 +73,8 @@ const Project = () => {
       try {
         const projectName = await getProjectName();
         const projectTasks = await getProjectTasks();
+        const sectionIds = getSectionIds(projectTasks);
+        const projectSections = await getProjectSections(sectionIds);
         let i = 0;
         while (i < projectTasks.length) {
           projectTasks[i].content = await getHtml(
@@ -81,10 +83,17 @@ const Project = () => {
           projectTasks[i].description = await getHtml(
             projectTasks[i].description
           );
+          if (projectTasks[i].sectionId) {
+            (projectTasks as Task_With_Section_Data[])[i].section =
+              getTaskSection(projectSections, projectTasks[i].sectionId);
+          }
           i += 1;
         }
         setName(projectName);
+        setSections(projectSections);
+        setInputSections(projectSections);
         setTasks(sortTasksByDate(projectTasks));
+        setFilteredTasks(sortTasksByDate(projectTasks));
         setDataLoaded(true);
       } catch (error) {
         throwError(error?.message);
@@ -95,37 +104,11 @@ const Project = () => {
   }, []);
 
   React.useEffect(() => {
-    setFilteredTasks(tasks);
-  }, [tasks]);
-
-  React.useEffect(() => {
     setLastPage(Math.ceil(filteredTasks.length / maxTasks));
   }, [filteredTasks, maxTasks]);
 
   React.useEffect(() => {
     setLabels(getTaskLabels(filteredTasks));
-  }, [filteredTasks]);
-
-  React.useEffect(() => {
-    (async () => {
-      try {
-        const sectionIds = getSectionIds(filteredTasks);
-        const projectSections = await getProjectSections(sectionIds);
-        setSections(projectSections);
-        setInputSections(projectSections);
-        let i = 0;
-        while (i < filteredTasks.length) {
-          filteredTasks[i].section = getTaskSection(
-            projectSections,
-            filteredTasks[i].sectionId
-          );
-          i += 1;
-        }
-      } catch (error) {
-        throwError(error?.message);
-        console.error(error);
-      }
-    })();
   }, [filteredTasks]);
 
   const handleViewMenu = () => {
