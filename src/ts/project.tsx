@@ -105,6 +105,7 @@ const Project = () => {
 
   React.useEffect(() => {
     setLastPage(Math.ceil(filteredTasks.length / maxTasks));
+    setCurrentPage(1);
   }, [filteredTasks, maxTasks]);
 
   React.useEffect(() => {
