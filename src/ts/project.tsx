@@ -42,6 +42,7 @@ const Project = () => {
     Task_With_Section_Data[]
   >([]);
   const [sections, setSections] = React.useState<Section[]>([]);
+  const [inputSections, setInputSections] = React.useState<Section[]>([]);
   const [labels, setLabels] = React.useState<string[]>([]);
   const [inputLabels, setInputLabels] = React.useState<string[]>([]);
   const [sort, setSort] = React.useState<"Date" | "Section">("Date");
@@ -54,6 +55,9 @@ const Project = () => {
     "Fetching data from Todoist"
   );
   const [hasError, setHasError] = React.useState(false);
+  const DEFAULT_FILTER_INPUT = "";
+  const [sectionInput, setSectionInput] = React.useState(DEFAULT_FILTER_INPUT);
+  const [labelInput, setLabelInput] = React.useState(DEFAULT_FILTER_INPUT);
   const view = React.useRef<HTMLDivElement>(null);
   const main = React.useRef<HTMLDivElement>(null);
 
@@ -108,6 +112,7 @@ const Project = () => {
         const sectionIds = getSectionIds(filteredTasks);
         const projectSections = await getProjectSections(sectionIds);
         setSections(projectSections);
+        setInputSections(projectSections);
         let i = 0;
         while (i < filteredTasks.length) {
           filteredTasks[i].section = getTaskSection(
@@ -181,15 +186,39 @@ const Project = () => {
   };
 
   const filterTasksBySection = (id: string) => {
+    if (id === DEFAULT_FILTER_INPUT) {
+      setFilteredTasks(tasks);
+      return;
+    }
+
+    setInputSections(inputSections.filter((section) => section.id === id));
+
     setFilteredTasks(
       filteredTasks.filter((task) => {
-        return task.section.id === id;
+        return task?.section?.id === id;
       })
     );
   };
 
+  React.useEffect(() => {
+    filterTasksBySection(sectionInput);
+  }, [sectionInput]);
+
+  const resetFilters = () => {
+    setSectionInput(DEFAULT_FILTER_INPUT);
+    setLabelInput(DEFAULT_FILTER_INPUT);
+    setInputSections(sections);
+    setInputLabels([]);
+  };
+
   const filterTasksByLabel = (inputLabel: string) => {
+    if (inputLabel === DEFAULT_FILTER_INPUT) {
+      setFilteredTasks(tasks);
+      return;
+    }
+
     setInputLabels([...inputLabels, inputLabel]);
+
     setFilteredTasks(
       filteredTasks.filter((task) => {
         return [...inputLabels, inputLabel].every((label) => {
@@ -198,6 +227,10 @@ const Project = () => {
       })
     );
   };
+
+  React.useEffect(() => {
+    filterTasksByLabel(labelInput);
+  }, [labelInput]);
 
   const handleTopButton = () => {
     main.current.scrollIntoView({
@@ -255,7 +288,7 @@ const Project = () => {
             <ul>
               <li className="subheading-text">
                 <ButtonWithIcon
-                  action={() => setFilteredTasks(tasks)}
+                  action={() => resetFilters()}
                   image={resetIcon.src}
                   text="Reset filters"
                 />
@@ -265,11 +298,11 @@ const Project = () => {
                   <TextWithIcon image={sectionIcon.src} text="Section" />
                   <select
                     className="label-with-icon__select"
-                    onChange={(event) =>
-                      filterTasksBySection(event.target.value)
-                    }
+                    value={sectionInput}
+                    onChange={(event) => setSectionInput(event.target.value)}
                   >
-                    {sections
+                    <option value={DEFAULT_FILTER_INPUT} disabled></option>
+                    {inputSections
                       .sort((a, b) => {
                         return b?.order - a?.order;
                       })
@@ -288,8 +321,10 @@ const Project = () => {
                   <TextWithIcon image={labelIcon.src} text="Label" />
                   <select
                     className="label-with-icon__select"
-                    onChange={(event) => filterTasksByLabel(event.target.value)}
+                    value={labelInput}
+                    onChange={(event) => setLabelInput(event.target.value)}
                   >
+                    <option disabled value={DEFAULT_FILTER_INPUT}></option>
                     {labels
                       .sort((a, b) => {
                         const labelA = a.toLowerCase();
