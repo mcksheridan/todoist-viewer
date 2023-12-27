@@ -9,10 +9,38 @@
       body {
         font-family: sans-serif;
       }
+
+      .loading {
+        text-align: center;
+        width: 90%;
+        margin: 30vh auto;
+      }
+
+      .loading__heading {
+        color: rgb(204 76 80 / 100%);
+        font-size: 1.75rem;
+      }
+
+      .subheading-text {
+        color: rgb(109 109 109 / 100%);
+        font-weight: 400;
+        font-size: 1.1375rem;
+      }
+
+      @media (min-width: 35rem) {
+        .loading__heading {
+          font-size: calc(1.75rem / 1.4);
+        }
+        .subheading-text {
+          font-size: calc(1.1375rem / 1.4);
+        }
+      }
     </style>
   </head>
   <body>
-    <h1>Todoist Project Viewer</h1>
-    <p>This page requires JavaScript to load.</p>
+    <div class="loading">
+      <h1 class="loading__heading">Todoist Project Viewer</h1>
+      <p class="subheading-text">Please enable JavaScript to view this page</p>
+    </div>
   </body>
 </html>
