@@ -155,14 +155,14 @@ const Project = () => {
   const handleSort = () => {
     if (sort === "Section") {
       setSort("Date");
-      setTasks(sortTasksByDate(tasks));
+      setFilteredTasks(sortTasksByDate(filteredTasks));
       setCurrentPage(1);
       return;
     }
 
     if (sort === "Date") {
       setSort("Section");
-      setTasks(sortTasksBySection(tasks));
+      setFilteredTasks(sortTasksBySection(filteredTasks));
       setCurrentPage(1);
       return;
     }

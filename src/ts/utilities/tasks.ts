@@ -36,10 +36,30 @@ const removeBulletPoints = (string: string): string => {
   return string;
 };
 
-const sortTasksByDate = (tasks: Task[]): Task[] => {
+const getTaskDueDate = (task: Task_With_Section_Data): Date | number => {
+  if (task?.due?.datetime) {
+    return new Date(task.due.datetime);
+  }
+
+  if (task?.due?.date) {
+    return new Date(task.due.date);
+  }
+
+  return -1;
+};
+
+const sortTasksByDate = (
+  tasks: Task_With_Section_Data[]
+): Task_With_Section_Data[] => {
   return tasks.sort((a, b) => {
-    const dateA = new Date(a?.due?.datetime ?? a?.due?.date);
-    const dateB = new Date(b?.due?.datetime ?? b?.due?.date);
+    const dateA = getTaskDueDate(a);
+    const dateB = getTaskDueDate(b);
+    if (dateA === -1) {
+      return 2;
+    }
+    if (dateB === -1) {
+      return 0;
+    }
     if (dateA > dateB) {
       return 1;
     } else if (dateA < dateB) {
@@ -54,9 +74,15 @@ const sortTasksBySection = (
   tasks: Task_With_Section_Data[]
 ): Task_With_Section_Data[] => {
   return tasks.sort((a, b) => {
-    if (a?.section?.order > b?.section?.order) {
+    if (
+      a?.section?.order > b?.section?.order ||
+      (a?.section?.order && !b?.section?.order)
+    ) {
       return -1;
-    } else if (a?.section?.order < b?.section?.order) {
+    } else if (
+      a?.section?.order < b?.section?.order ||
+      (!a?.section?.order && b?.section?.order)
+    ) {
       return 1;
     } else {
       return 0;
